@@ -22,7 +22,7 @@ AddEventHandler("tarp-robbery:awalperampokan", function(robtime)
         pol = pol + 1    
     end
 
-    if pol >= 1 then 
+    if pol >= 1 then --untuk mengatur anggota sherrif
         if count >= 1 then
             VORP.subItem(_source,"lockpick", 1)
             TriggerClientEvent('tarp-robbery:memulaiperampokan', _source)
@@ -44,7 +44,7 @@ AddEventHandler("tarp-robbery:policeinfo", function(players, coords, alert)
 			if Character.job == 'police' or Character.job == 'marshal' or Character.job == 'sheriff' then
 				TriggerClientEvent("Witness:ToggleNotification2", player, coords, alert)
 			end
-            --TriggerClientEvent('tarp-notify:client:SendAlert', -1, { type = 'inform', text = "perampokan di daerah "..alert })
+            TriggerClientEvent('tarp-notify:client:SendAlert', -1, { type = 'inform', text = "perampokan di daerah "..alert })
         end
     end
 end)

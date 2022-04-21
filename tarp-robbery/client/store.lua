@@ -5,24 +5,14 @@ local timers = false
 local storetimer = nil
 local storenumber = nil
 
-
-RegisterNetEvent("Witness:ToggleNotification2")
-AddEventHandler("Witness:ToggleNotification2", function(coords, alert)
-	--print('store name '..tostring(alert))
-	TriggerEvent("vorp:TipBottom", 'Telegram of Robbery in Progress at ' .. alert, 15000)
-	local blip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, coords.x, coords.y, coords.z, 15.0)
-	Wait(90000)--Time till notify blips dispears, 1 min
-	RemoveBlip(blip)
-end)
-
---[[RegisterNetEvent("tarp-robbery:information1")
+RegisterNetEvent("tarp-robbery:information1")
 AddEventHandler("tarp-robbery:information1", function(coords, alert)
 	print('perampokan notif')
-	TriggerEvent("vorp:TipBottom", 'perampokan sedang berlangsung | ' .. alert, 15000)
+	TriggerEvent("vorp:TipBottom", 'news : perampokan terjadi di ' .. alert, 15000)
 	local blip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, coords.x, coords.y, coords.z, 50.0)
 	Wait(90000)--Time till notify blips dispears, 1 min
 	RemoveBlip(blip)
-end)]]--
+end)
 
 function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
     local str = CreateVarString(10, "LITERAL_STRING", str)
@@ -42,7 +32,7 @@ Citizen.CreateThread(function()
         for i = 1, #Config.Toko do
            currentshop =  i
            if GetDistanceBetweenCoords(coords, Config.Toko[currentshop].coords.x, Config.Toko[currentshop].coords.y, Config.Toko[currentshop].coords.z, true)  < 1.2 then
-                DrawTxt("Press [~e~G~q~] to break into Register", 0.50, 0.95, 0.7, 0.7, true, 255, 255, 255, 255, true)
+                DrawTxt("Tekan [~e~G~q~] Untuk membobol berangkas", 0.50, 0.95, 0.7, 0.7, true, 255, 255, 255, 255, true)
                 if IsControlJustReleased(0, 0x760A9C6F) then
                     TriggerServerEvent("tarp-robbery:awalperampokan", function()
                 end)
@@ -80,10 +70,10 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
     if GetClockHours() > 20 or GetClockHours() < 5 then
         Wait(1000)
         if testplayer == 100 then
-            TaskStartScenarioInPlace(playerPed, GetHashKey('world_human_shop_browse_counter'), 5000, true, false, false, false)
-            exports['progressBars']:startUI(5000, "Getting The Loot...")
+            TaskStartScenarioInPlace(playerPed, GetHashKey('world_human_shop_browse_counter'), 60000, true, false, false, false)
+            exports['progressBars']:startUI(60000, "Getting The Loot...")
             Citizen.Wait(1000)
-            Citizen.Wait(5000)
+            Citizen.Wait(60000)
             ClearPedTasksImmediately(PlayerPedId())
             ClearPedSecondaryTask(PlayerPedId())
             Citizen.Wait(1000)
