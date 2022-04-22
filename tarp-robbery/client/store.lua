@@ -76,7 +76,7 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
             Citizen.Wait(60000)
             ClearPedTasksImmediately(PlayerPedId())
             ClearPedSecondaryTask(PlayerPedId())
-            Citizen.Wait(1000)
+            Citizen.Wait(30000)
             TriggerServerEvent("tarp-robbery:pendapatan", function(playerPed, coords)
             end)   
         end
