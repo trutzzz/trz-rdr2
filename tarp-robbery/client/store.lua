@@ -76,7 +76,7 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
             Citizen.Wait(60000)
             ClearPedTasksImmediately(PlayerPedId())
             ClearPedSecondaryTask(PlayerPedId())
-            Citizen.Wait(30000)
+            storecooldown()
             TriggerServerEvent("tarp-robbery:pendapatan", function(playerPed, coords)
             end)   
         end
@@ -84,3 +84,11 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
         exports['tarp-notify']:SendAlert('inform', ' tidak dapat melakukan aksi')
     end
 end)
+
+function storecooldown()
+    cooldown = 1800000        
+    while cooldown > 0 do
+        Wait(0)
+        cooldown = cooldown - 1
+    end
+end
