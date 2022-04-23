@@ -64,7 +64,7 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
     local _source = source
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
-    local testplayer = exports["tarp-skillbar"]:taskBar(4000,7)
+    local testplayer = exports["tarp-skillbar"]:taskBar(5000,7)
 
     --jam = GetClockHours()
     if GetClockHours() > 20 or GetClockHours() < 5 then
