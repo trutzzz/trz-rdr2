@@ -26,8 +26,7 @@ AddEventHandler("tarp-robbery:awalperampokan", function(robtime)
         if count >= 1 then
             VORP.subItem(_source,"lockpick", 1)
             TriggerClientEvent('tarp-robbery:memulaiperampokan', _source)
-            TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "seseorang memanggil sheriff" })
-            TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "sheriff akan datang dalam waktu 1 menit" })
+            TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu merampok toko" })
         else
             TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai alat untuk merampok" })
         end
@@ -54,12 +53,12 @@ AddEventHandler("tarp-robbery:pendapatan", function()
     TriggerEvent('vorp:getCharacter', source, function(user)
         local _source = source
         local _user = user
-       -- randommoney = math.random(10,20)
+        -- randommoney = math.random(10,20)
         ritem = math.random(5,10)
         local randomitempull = math.random(1, #Config.Items)
         local itemName = Config.Items[randomitempull]
         VORP.addItem(_source, itemName, ritem)
-        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan item ketika membobol"})
+        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan item "..itemName..' - '..ritem})
     end)    
 end)
 

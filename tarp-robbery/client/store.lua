@@ -4,6 +4,9 @@ local isRobbing = false
 local timers = false
 local storetimer = nil
 local storenumber = nil
+local cooldown = 0
+local hour = GetClockHours()
+local minute = GetClockMinutes()
 
 RegisterNetEvent("tarp-robbery:information1")
 AddEventHandler("tarp-robbery:information1", function(coords, alert)
@@ -64,29 +67,34 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
     local _source = source
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
-    local testplayer = exports["tarp-skillbar"]:taskBar(5000,7)
-
-    --jam = GetClockHours()
+    --local testplayer = exports["tarp-skillbar"]:taskBar(5000,7)
+    local testplayer = exports["lockpick"]:lockpick()
+    
     if GetClockHours() > 20 or GetClockHours() < 5 then
-        Wait(1000)
-        if testplayer == 100 then
-            TaskStartScenarioInPlace(playerPed, GetHashKey('world_human_shop_browse_counter'), 60000, true, false, false, false)
-            exports['progressBars']:startUI(60000, "Membobol Berangkas...")
-            Citizen.Wait(1000)
-            Citizen.Wait(60000)
-            ClearPedTasksImmediately(PlayerPedId())
-            ClearPedSecondaryTask(PlayerPedId())
-            storecooldown()
-            TriggerServerEvent("tarp-robbery:pendapatan", function(playerPed, coords)
-            end)   
-        end
+        if cooldown == 0 then 
+            --Wait(1000)
+            if testplayer then 
+                TaskStartScenarioInPlace(playerPed, GetHashKey('world_human_shop_browse_counter'), 12000, true, false, false, false)
+                exports['progressBars']:startUI(12000, "Membobol Berangkas...")
+                Citizen.Wait(1000)
+                Citizen.Wait(12000)
+                ClearPedTasksImmediately(PlayerPedId())
+                ClearPedSecondaryTask(PlayerPedId())
+                TriggerServerEvent("tarp-robbery:pendapatan", function(playerPed, coords)
+                end)
+                storecooldown()
+                exports['tarp-notify']:SendAlert('inform', 'kamu berhasil membobol')
+            end
+        else
+            exports['tarp-notify']:SendAlert('inform', ' area ini masih dalam pengawasan sheriff selama '..minute..' menit')
+        end    
     else
         exports['tarp-notify']:SendAlert('inform', ' tidak dapat melakukan aksi')
     end
 end)
 
 function storecooldown()
-    cooldown = 1800000        
+    cooldown = 18000000        
     while cooldown > 0 do
         Wait(0)
         cooldown = cooldown - 1
