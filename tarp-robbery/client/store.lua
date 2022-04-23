@@ -71,7 +71,7 @@ AddEventHandler("tarp-robbery:memulaiperampokan", function()
         Wait(1000)
         if testplayer == 100 then
             TaskStartScenarioInPlace(playerPed, GetHashKey('world_human_shop_browse_counter'), 60000, true, false, false, false)
-            exports['progressBars']:startUI(60000, "Getting The Loot...")
+            exports['progressBars']:startUI(60000, "Membobol Berangkas...")
             Citizen.Wait(1000)
             Citizen.Wait(60000)
             ClearPedTasksImmediately(PlayerPedId())
