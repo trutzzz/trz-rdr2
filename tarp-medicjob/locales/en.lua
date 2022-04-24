@@ -15,6 +15,7 @@ Locales['en'] = {
     ['spawn_horse'] = 'Spawn horse',
     ['take_syringe'] = 'Syringe',
     ['take_bandage'] = 'Bandage',
+    ['take_oplas'] = 'Tiket Oplas',
     ['you_full'] = 'You already have supplies in inventory',
     ['you_take'] = 'You have taken supplies',
     ['change_clothes'] = 'Change clothes',

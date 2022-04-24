@@ -101,3 +101,14 @@ AddEventHandler('rwt-medic:takeBandage', function()
         TriggerClientEvent('tarp-notify:client:SendAlert', source, { type = 'inform', text = "anda mengambil 5 bandage dari lemari" })
     end
 end)
+
+RegisterServerEvent('rwt-medic:takeOplas')
+AddEventHandler('rwt-medic:takeOplas', function()
+    local _source = source
+    Inventory.addItem(_source, "secondchance", Config.item2)
+    local count = Inventory.getItemCount(_source, "secondchance")
+    if count > 0 then 
+        --TriggerClientEvent("vorp:TipBottom", source, 'You took 10 Syringes from Cabinet', 3000)
+        TriggerClientEvent('tarp-notify:client:SendAlert', source, { type = 'inform', text = "anda mengambil 1 ticket oplas dari lemari" })
+    end
+end)

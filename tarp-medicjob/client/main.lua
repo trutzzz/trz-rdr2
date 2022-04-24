@@ -60,6 +60,8 @@ Citizen.CreateThread(function()
                 TriggerServerEvent('rwt-medic:takeSyringe')
             elseif WarMenu.Button(_U('take_bandage')) then
                 TriggerServerEvent('rwt-medic:takeBandage')
+            elseif WarMenu.Button(_U('take_oplas')) then
+                TriggerServerEvent('rwt-medic:takeOplas')
             end
             WarMenu.Display()
         elseif IsControlJustReleased(0, 5) then -- SUPR
