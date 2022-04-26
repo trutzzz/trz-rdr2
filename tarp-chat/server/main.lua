@@ -110,10 +110,20 @@ RegisterCommand('ooc', function(source, args, rawCommand)
     TriggerClientEvent("chatMessage", -1, "[OOC] ["..name.."]", {240, 255, 255}, args) --- 9, 81, 3
 end, false)
 
-RegisterCommand('clear', function(source, args, rawCommand)
+RegisterCommand('admin', function(source, args, rawCommand)
     local src = source
-    TriggerClientEvent('chat:clear', source)
-    TriggerClientEvent('tarp-notify:client:SendAlert', src, { type = 'inform', text = "reset chat" })
+    local playerName
+    args = table.concat(args, ' ')
+    local name = GetPlayerName(source)
+    local User = VorpCore.getUser(source)
+    local Character = User.getUsedCharacter
+    local rwt = User.getGroup
+    local playerName = Character.firstname..' '..Character.lastname
+    if rwt == 'admin' then
+        TriggerClientEvent("chatMessage", src, "[team - "..name.."]", {240, 255, 255}, args) --- 9, 81, 3
+    else
+        TriggerClientEvent('tarp-notify:client:SendAlert', src, { type = 'inform', text = "you dont have permission" })
+    end 
 end, false)
 
 --job&gang
