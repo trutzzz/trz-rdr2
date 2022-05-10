@@ -53,7 +53,7 @@ Citizen.CreateThread(function()
                     WarMenu.CloseMenu()
 
                 elseif WarMenu.Button('No') then
-                    exports['tarp-notify']:SendAlert('inform', ' you suck  ')
+                    exports['tarp-notify']:SendAlert('inform', ' you suck :) ')
                     WarMenu.CloseMenu()
                 end
             end
@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
                     WarMenu.CloseMenu()
 
                 elseif WarMenu.Button('No') then
-                    exports['tarp-notify']:SendAlert('inform', ' you suck  ')
+                    exports['tarp-notify']:SendAlert('inform', ' you suck :) ')
                     WarMenu.CloseMenu()
                 end
             end
