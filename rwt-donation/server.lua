@@ -29,21 +29,45 @@ end)
 RegisterServerEvent('rwt-donation:tier1')
 AddEventHandler('rwt-donation:tier1', function()
     local _source = source
-    --Inventory.addItem(_source, "syringe", Config.item1)
     local count = rwt.getItemCount(_source, "tiket_donation")
     if count >= 1 then
         --local ritem = 1
         local steamhex = GetPlayerIdentifier(_source)
         local name = GetPlayerName(_source)
-        local randomitempull = math.random(1, #Config.tier1)
-        local itemt1 = Config.tier1[randomitempull]
-        local description = "[ "..steamhex.." ] Mendapatkan sebuah tiket berupa " ..itemt1.. " berjumlah 1"
+        local randomrwt1 = math.random(1, #Config.tier1)
+        local itemt1 = Config.tier1[randomrwt1]
+        local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah tiket berupa **" ..itemt1.. "** berjumlah 1 di **TIER-1**"
         Discord('Tier-1',_source,description)
 
         rwt.subItem(_source,"tiket_donation", 1)
         rwt.addItem(_source, itemt1, 1)
         
         TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan voucher "..itemt1..' - 1'})
+        print("sukses")
+    else
+        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
+        print("gagal melakukan")
+    end
+end)
+
+
+RegisterServerEvent('rwt-donation:tier2')
+AddEventHandler('rwt-donation:tier2', function()
+    local _source = source
+    local count = rwt.getItemCount(_source, "tiket_donation")
+    if count >= 1 then
+        --local ritem = 1
+        local steamhex = GetPlayerIdentifier(_source)
+        local name = GetPlayerName(_source)
+        local randomrwt2 = math.random(1, #Config.tier2)
+        local itemt2 = Config.tier2[randomrwt2]
+        local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah tiket berupa **" ..itemt2.. "** berjumlah 1 di **TIER-2**"
+        Discord('Tier-2',_source,description)
+
+        rwt.subItem(_source,"tiket_donation", 1)
+        rwt.addItem(_source, itemt2, 1)
+        
+        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan voucher "..itemt2..' - 1'})
         print("sukses")
     else
         TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
