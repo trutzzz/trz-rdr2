@@ -4,7 +4,7 @@ Config.donloc = {
     { x = -238.77, y = 767.75, z = 118.08 }
 }
 
-Config.tier1 = {
+--[[Config.tier1 = {
     "bandage",
     "bread"
 }
@@ -12,6 +12,17 @@ Config.tier1 = {
 Config.tier2 = {
     "water",
     "cornseed"
+}]]--
+
+Config.tier1 = {
+    "WEAPON_LASSO",
+    "WEAPON_MELEE_KNIFE",
+    "WEAPON_MELEE_HATCHET",
+    "WEAPON_THROWN_TOMAHAWK"
+}
+
+Config.rareitem = {
+   
 }
 
 Config.webhookavatar = "https://cdn3.iconfinder.com/data/icons/hand/500/Hand_give_thumbs_finger-512.png"

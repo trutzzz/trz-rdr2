@@ -26,7 +26,7 @@ AddEventHandler('rwt-donation:opendonation', function(type)
     end
 end)
 
-RegisterServerEvent('rwt-donation:tier1')
+--[[RegisterServerEvent('rwt-donation:tier1')
 AddEventHandler('rwt-donation:tier1', function()
     local _source = source
     local count = rwt.getItemCount(_source, "tiket_donation")
@@ -48,8 +48,41 @@ AddEventHandler('rwt-donation:tier1', function()
         TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
         print("gagal melakukan")
     end
-end)
+end)]]--
 
+
+RegisterNetEvent('rwt-donation:tier1')
+AddEventHandler('rwt-donation:tier1',function()
+
+  local _source = source
+  local count = rwt.getItemCount(_source, "tiket_donation")
+  if count >= 1 then
+    local steamhex = GetPlayerIdentifier(_source)
+    local name = GetPlayerName(_source)
+    local dptgun = math.random(1, #Config.tier1)
+    local weaponHash = Config.tier1[dptgun]
+    local ammo = {["nothing"] = 0}
+    local components =  {["nothing"] = 0}
+    local id =  source
+    local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah Item berupa  **" ..weaponHash.. "** berjumlah 1 di **TIER-1**"
+    Discord('Tier-1',_source,description)
+
+    rwt.subItem(_source,"tiket_donation", 1)
+    
+    TriggerEvent("vorpCore:canCarryWeapons", tonumber(id), 1, function(canCarry)
+      --VorpInv.createWeapon(id, weaponHash, ammo, components)
+      if canCarry then 
+        -- TriggerEvent("vorpCore:registerWeapon", tonumber(id), weaponHash, ammo, components)
+         rwt.createWeapon(tonumber(id), weaponHash, ammo, components)
+         --Discord("Player Used give weapon "..args[2], "Player ID: "..GetPlayerName(source).."\nCharacter: "..playername, 65280)
+         TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "Kamu Mendapatkan Gacha | Silakan Cek Di Inventory" })
+       end
+    end)
+  else
+    TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
+    print("gagal melakukan")
+  end 
+end)
 
 RegisterServerEvent('rwt-donation:tier2')
 AddEventHandler('rwt-donation:tier2', function()
