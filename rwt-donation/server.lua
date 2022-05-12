@@ -17,7 +17,7 @@ AddEventHandler('rwt-donation:opendonation', function(type)
     local _source = source
     local Character = VorpCore.getUser(_source).getUsedCharacter
     --local job = Character.job
-    local count = rwt.getItemCount(_source, "tiket_donation")
+    local count = rwt.getItemCount(_source, "cointa")
 
     if count >= 1 then
         TriggerClientEvent('rwt-donation:open', _source, type)
@@ -26,36 +26,12 @@ AddEventHandler('rwt-donation:opendonation', function(type)
     end
 end)
 
---[[RegisterServerEvent('rwt-donation:tier1')
-AddEventHandler('rwt-donation:tier1', function()
-    local _source = source
-    local count = rwt.getItemCount(_source, "tiket_donation")
-    if count >= 1 then
-        --local ritem = 1
-        local steamhex = GetPlayerIdentifier(_source)
-        local name = GetPlayerName(_source)
-        local randomrwt1 = math.random(1, #Config.tier1)
-        local itemt1 = Config.tier1[randomrwt1]
-        local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah tiket berupa **" ..itemt1.. "** berjumlah 1 di **TIER-1**"
-        Discord('Tier-1',_source,description)
-
-        rwt.subItem(_source,"tiket_donation", 1)
-        rwt.addItem(_source, itemt1, 1)
-        
-        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan voucher "..itemt1..' - 1'})
-        print("sukses")
-    else
-        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
-        print("gagal melakukan")
-    end
-end)]]--
-
 
 RegisterNetEvent('rwt-donation:tier1')
 AddEventHandler('rwt-donation:tier1',function()
 
   local _source = source
-  local count = rwt.getItemCount(_source, "tiket_donation")
+  local count = rwt.getItemCount(_source, "cointa")
   if count >= 1 then
     local steamhex = GetPlayerIdentifier(_source)
     local name = GetPlayerName(_source)
@@ -67,7 +43,7 @@ AddEventHandler('rwt-donation:tier1',function()
     local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah Item berupa  **" ..weaponHash.. "** berjumlah 1 di **TIER-1**"
     Discord('Tier-1',_source,description)
 
-    rwt.subItem(_source,"tiket_donation", 1)
+    rwt.subItem(_source,"cointa", 1)
     
     TriggerEvent("vorpCore:canCarryWeapons", tonumber(id), 1, function(canCarry)
       --VorpInv.createWeapon(id, weaponHash, ammo, components)
@@ -84,28 +60,70 @@ AddEventHandler('rwt-donation:tier1',function()
   end 
 end)
 
-RegisterServerEvent('rwt-donation:tier2')
-AddEventHandler('rwt-donation:tier2', function()
-    local _source = source
-    local count = rwt.getItemCount(_source, "tiket_donation")
-    if count >= 1 then
-        --local ritem = 1
-        local steamhex = GetPlayerIdentifier(_source)
-        local name = GetPlayerName(_source)
-        local randomrwt2 = math.random(1, #Config.tier2)
-        local itemt2 = Config.tier2[randomrwt2]
-        local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah tiket berupa **" ..itemt2.. "** berjumlah 1 di **TIER-2**"
-        Discord('Tier-2',_source,description)
+RegisterNetEvent('rwt-donation:tier2')
+AddEventHandler('rwt-donation:tier2',function()
 
-        rwt.subItem(_source,"tiket_donation", 1)
-        rwt.addItem(_source, itemt2, 1)
-        
-        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu mendapatkan voucher "..itemt2..' - 1'})
-        print("sukses")
-    else
-        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
-        print("gagal melakukan")
-    end
+  local _source = source
+  local count = rwt.getItemCount(_source, "cointa")
+  if count >= 2 then
+    local steamhex = GetPlayerIdentifier(_source)
+    local name = GetPlayerName(_source)
+    local dptgun = math.random(1, #Config.tier2)
+    local weaponHash = Config.tier2[dptgun]
+    local ammo = {["nothing"] = 0}
+    local components =  {["nothing"] = 0}
+    local id =  source
+    local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah Item berupa  **" ..weaponHash.. "** berjumlah 1 di **TIER-2**"
+    Discord('Tier-2',_source,description)
+
+    rwt.subItem(_source,"cointa", 2)
+    
+    TriggerEvent("vorpCore:canCarryWeapons", tonumber(id), 1, function(canCarry)
+      --VorpInv.createWeapon(id, weaponHash, ammo, components)
+      if canCarry then 
+        -- TriggerEvent("vorpCore:registerWeapon", tonumber(id), weaponHash, ammo, components)
+         rwt.createWeapon(tonumber(id), weaponHash, ammo, components)
+         --Discord("Player Used give weapon "..args[2], "Player ID: "..GetPlayerName(source).."\nCharacter: "..playername, 65280)
+         TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "Kamu Mendapatkan Gacha | Silakan Cek Di Inventory" })
+       end
+    end)
+  else
+    TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
+    print("gagal melakukan")
+  end 
+end)
+
+RegisterNetEvent('rwt-donation:rare')
+AddEventHandler('rwt-donation:rare',function()
+
+  local _source = source
+  local count = rwt.getItemCount(_source, "cointa")
+  if count >= 3 then
+    local steamhex = GetPlayerIdentifier(_source)
+    local name = GetPlayerName(_source)
+    local dptgun = math.random(1, #Config.rareitem)
+    local weaponHash = Config.rareitem[dptgun]
+    local ammo = {["nothing"] = 0}
+    local components =  {["nothing"] = 0}
+    local id =  source
+    local description = "**System :** [ "..steamhex.." ] Mendapatkan sebuah Item berupa  **" ..weaponHash.. "** berjumlah 1 di **RARE-TIER-3**"
+    Discord('Rare',_source,description)
+
+    rwt.subItem(_source,"cointa", 3)
+    
+    TriggerEvent("vorpCore:canCarryWeapons", tonumber(id), 1, function(canCarry)
+      --VorpInv.createWeapon(id, weaponHash, ammo, components)
+      if canCarry then 
+        -- TriggerEvent("vorpCore:registerWeapon", tonumber(id), weaponHash, ammo, components)
+        rwt.createWeapon(tonumber(id), weaponHash, ammo, components)
+         --Discord("Player Used give weapon "..args[2], "Player ID: "..GetPlayerName(source).."\nCharacter: "..playername, 65280)
+        TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "Kamu Mendapatkan Gacha | Silakan Cek Di Inventory" })
+       end
+    end)
+  else
+    TriggerClientEvent('tarp-notify:client:SendAlert', _source, { type = 'inform', text = "kamu tidak mempunyai item untuk membuka menu" })
+    print("gagal melakukan")
+  end 
 end)
 
 function Discord(title,_source,description)

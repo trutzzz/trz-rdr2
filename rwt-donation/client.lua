@@ -17,6 +17,7 @@ Citizen.CreateThread(function()
     WarMenu.CreateMenu('donation_room', 'Gacha Menu')
     WarMenu.CreateSubMenu('menu_donation', 'donation_room', 'Gacha')
     WarMenu.CreateSubMenu('menu_donation2', 'donation_room', 'Gacha')
+    WarMenu.CreateSubMenu('menu_donation3', 'donation_room', 'Gacha')
 
     while true do
 
@@ -38,8 +39,9 @@ Citizen.CreateThread(function()
         end
 
         if WarMenu.IsMenuOpened('donation_room') then
-            if WarMenu.MenuButton('Tier 1 - [ 1 tiket ] + cooldown 10 detik', 'menu_donation') then
-            elseif WarMenu.MenuButton('Tier 2 - [ 2 tiket ] + cooldown 10 detik', 'menu_donation2')then
+            if WarMenu.MenuButton('Tier 1 - [ 1 coin ] + cooldown 10 detik', 'menu_donation') then
+            elseif WarMenu.MenuButton('Tier 2 - [ 2 coin ] + cooldown 10 detik', 'menu_donation2')then
+            elseif WarMenu.MenuButton('Tier 3 - [ 3 coin ] + cooldown 10 detik', 'menu_donation3')then
             end
             WarMenu.Display()
         elseif WarMenu.IsMenuOpened('menu_donation') then
@@ -74,7 +76,23 @@ Citizen.CreateThread(function()
                 end
             end
             WarMenu.Display()
-        
+
+        elseif WarMenu.IsMenuOpened('menu_donation3') then
+            if cooldown == 0 then
+                if WarMenu.Button('Yes') then
+                    TriggerServerEvent('rwt-donation:rare')
+                    exports['tarp-notify']:SendAlert('inform', ' cooldown aktif + please wait')
+
+                    donationcooldown()
+                    exports['tarp-notify']:SendAlert('inform', ' cooldown nonaktif ')
+                    WarMenu.CloseMenu()
+
+                elseif WarMenu.Button('No') then
+                    exports['tarp-notify']:SendAlert('inform', ' you suck  ')
+                    WarMenu.CloseMenu()
+                end
+            end
+            WarMenu.Display()
         end
         Citizen.Wait(0)
     end
